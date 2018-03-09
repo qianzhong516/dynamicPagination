@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+li{
+	list-style: none;
+	display: inline-block;
+}
+ul{
+	margin: 0;
+	padding: 0;
+	-webkit-user-select: none; /*easy for testing*/
+}
+ul li{
+	list-style: none;
+	display: inline-block;
+	padding-right: 3px; /*override the li style when append them*/
+}
+a{
+	text-decoration: none;
+}
+.active{
+	color: red;
+}
+</style>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+<ul>
+<li><a href="#" class="pre"><<</a></li>
+<li><a href="#" class="active">1</a></li>
+<li><a href="#">2</a></li>
+<li><a href="#">3</a></li>
+<li><a href="#">4</a></li>
+<li><a href="#">5</a></li>
+<li><a href="#">6</a></li>
+
+<li><a href="#">7</a></li>
+<li><a href="#">8</a></li>
+<li><a href="#">9</a></li>
+<li><a href="#">10</a></li>
+
+<li><a href="#" >11</a></li>
+<li><a href="#" class="next">>></a></li>
+</ul>
+<script>
+//decide which nums will be displayed
+var arrOfNums=[];
+var maxNum=11; var displayAmount=7;
+var active;
+
+firstDisplay(maxNum, displayAmount);
+
+function firstDisplay(maxNum,displayAmount){
+	//only 7 nums will be display, hide extra nums
+	for(var i=1; i<displayAmount; i++){
+		arrOfNums.push(String(i));
+	}
+	arrOfNums.push('...');arrOfNums.push(String(maxNum));
+	CreateNewList(arrOfNums);
+}
+
+function attachEvent(){
+
+	$('ul li a').one('click',function(e){
+		e.preventDefault();
+		if( $(e.target).text()!=="..." && !$(e.target).is($('.pre')) && !$(e.target).is($('.next'))){
+			//store the active number, restore class active after add in new els
+			$('ul li a').removeClass('active');
+			$(this).addClass('active');
+			active=$('.active').text();
+			// target=e.target;
+			movePointer(e.target);
+		
+		}else if($(e.target).is($('.pre')) || $(e.target).is($('.next'))){//if pre or next is click
+				if($(e.target).is($('.pre'))){
+					active=String(parseInt($('.active').text())-1);
+					if(active==="0"){ //rightest offset
+						active=String(maxNum);
+						var target= $('ul li:eq('+(displayAmount+1)+')');	
+					}else{
+						var target= $('.active').parent().prev().children();
+					}
+					movePointer(target);	
+				}else{ //leftest offset
+					active=String(parseInt($('.active').text())+1);
+					if(active===String(maxNum+1)){
+						active="1";
+						var target= $('ul li:eq(1)');
+					}else{	
+					var target= $('.active').parent().next().children();}					
+					movePointer(target);		
+				}			
+		}
+	});
+
+}
+
+function movePointer(target){
+		//when there is only 1,2,3,4 can be chosen and nowhere to append '...'
+		if(parseInt($(target).text())<=4){
+			arrOfNums=[];
+			firstDisplay(maxNum,displayAmount);		
+		}	
+		//when there is only maxNum, maxNum-1, maxNum-2, maxNum-3 can be chosen and nowhere to append '...'
+		else if(parseInt($(target).text())>=maxNum-3){
+			arrOfNums=["1","..."];
+			for(var i=displayAmount-2; i> -1 ; i--){
+				arrOfNums.push(String(maxNum-i));
+			}
+			CreateNewList(arrOfNums);
+		}else{
+			commonSituation();
+		}
+		//when els in the middle is clicked
+		function commonSituation(){
+			arrOfNums=[];
+			arrOfNums.push("1","...");
+			for(var i=-2; i<=2 ; i++){
+				var num= parseInt($(target).text())+i;
+				arrOfNums.push(String(num));
+			}
+			arrOfNums.push("...","11");
+			CreateNewList(arrOfNums);
+		}
+}
+
+function CreateNewList(arrOfNums){
+	list=$('ul li'); 
+	for(var i=1; i< list.length-1; i++){ //remove the original els
+		list.get(i).remove();
+	}
+	for(var i=arrOfNums.length-1 ; i>-1 ; i--){ //insert the new els
+		if(active===arrOfNums[i]){
+			$(list[0]).after('<li><a href="#" class="active" >'+arrOfNums[i]+'</a></li>');	
+		}else{
+			$(list[0]).after('<li><a href="#">'+arrOfNums[i]+'</a></li>');			
+		}
+	}
+	$('ul li a').off('click'); //prevent same event fired multiple times on pre and next button, because they are never removed from the list
+	attachEvent(); //DOM els changed, reattach event
+}
+</script>
+</body>
+</html>

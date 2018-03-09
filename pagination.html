@@ -101,12 +101,12 @@ function attachEvent(){
 }
 
 function movePointer(target){
-		//when there is only 1,2,3,4 can be chosen and nowhere to append '...'
+		//when there are only 1,2,3,4 can be chosen and nowhere to append '...'
 		if(parseInt($(target).text())<=4){
 			arrOfNums=[];
 			firstDisplay(maxNum,displayAmount);		
 		}	
-		//when there is only maxNum, maxNum-1, maxNum-2, maxNum-3 can be chosen and nowhere to append '...'
+		//when there are only maxNum, maxNum-1, maxNum-2, maxNum-3 can be chosen and nowhere to append '...'
 		else if(parseInt($(target).text())>=maxNum-3){
 			arrOfNums=["1","..."];
 			for(var i=displayAmount-2; i> -1 ; i--){
@@ -116,7 +116,7 @@ function movePointer(target){
 		}else{
 			commonSituation();
 		}
-		//when els in the middle is clicked
+		//when els among the middle range is clicked
 		function commonSituation(){
 			arrOfNums=[];
 			arrOfNums.push("1","...");

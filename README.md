@@ -1,5 +1,5 @@
 # dynamicPagination-jquery
-dynamic toggled pagination with jquery (ex: <1 2 3 4 ... 11> => <1 ... 3 4 5 ... 11>)<br/>
+dynamic pagination with jquery (ex: <1 2 3 4 ... 11> => <1 ... 3 4 5 ... 11>)<br/>
 <h2>User Guide:</h2>
 <p>Feel free to use this piece of code with ajax. The maximum page number and the display amount of numbers in the list can both be customized.</p>
 <h3>The Idea About This Code:</h3>

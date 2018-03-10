@@ -51,7 +51,7 @@ a{
 //decide which nums will be displayed
 var arrOfNums=[];
 var maxNum=11; var displayAmount=7;
-var active;
+var active="1";
 
 firstDisplay(maxNum, displayAmount);
 
@@ -64,6 +64,22 @@ function firstDisplay(maxNum,displayAmount){
 	CreateNewList(arrOfNums);
 }
 
+function CreateNewList(arrOfNums){
+	list=$('ul li'); 
+	for(var i=1; i< list.length-1; i++){ //remove the original els
+		list.get(i).remove();
+	}
+	for(var i=arrOfNums.length-1 ; i>-1 ; i--){ //insert the new els
+		if(active===arrOfNums[i]){
+			$(list[0]).after('<li><a href="#" class="active" >'+arrOfNums[i]+'</a></li>');	
+		}else{
+			$(list[0]).after('<li><a href="#">'+arrOfNums[i]+'</a></li>');			
+		}
+	}
+	$('ul li a').off('click'); //prevent same event fired multiple times on pre and next button, because they are never removed from the list
+	attachEvent(); //DOM els changed, reattach event
+}
+	
 function attachEvent(){
 
 	$('ul li a').one('click',function(e){
@@ -127,22 +143,6 @@ function movePointer(target){
 			arrOfNums.push("...","11");
 			CreateNewList(arrOfNums);
 		}
-}
-
-function CreateNewList(arrOfNums){
-	list=$('ul li'); 
-	for(var i=1; i< list.length-1; i++){ //remove the original els
-		list.get(i).remove();
-	}
-	for(var i=arrOfNums.length-1 ; i>-1 ; i--){ //insert the new els
-		if(active===arrOfNums[i]){
-			$(list[0]).after('<li><a href="#" class="active" >'+arrOfNums[i]+'</a></li>');	
-		}else{
-			$(list[0]).after('<li><a href="#">'+arrOfNums[i]+'</a></li>');			
-		}
-	}
-	$('ul li a').off('click'); //prevent same event fired multiple times on pre and next button, because they are never removed from the list
-	attachEvent(); //DOM els changed, reattach event
 }
 </script>
 </body>

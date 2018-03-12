@@ -9,5 +9,3 @@ dynamic pagination with jquery (ex: <1 2 3 4 ... 11> => <1 ... 3 4 5 ... 11>)<br
   <li>class="active" needs to be stored then recovered in the new list.</li>
 </ol>
 </p>
-
-<p>Hope you have fun with it XD</p>

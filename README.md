@@ -7,7 +7,7 @@ demo link: https://qianzhong516.github.io/dynamicPagination/
 * <1, ... 6, 7, 8, 9, 10>, current = 10
 * <1, ... 2, 3, 4, 5, 6, ... 10>, current = 4
 
-## Usage:
+## Usage
 ```javascript
 new Pagination('demo');
 ```

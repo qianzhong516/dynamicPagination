@@ -1,11 +1,18 @@
-# dynamicPagination-jquery
-dynamic pagination with jquery (ex: <1 2 3 4 ... 11> => <1 ... 3 4 5 ... 11>)<br/>
-<h2>User Guide:</h2>
-<p>Feel free to use this piece of code with ajax. The maximum page number and the display amount of numbers in the list can both be customized.</p>
-<h3>The Idea About This Code:</h3>
-<p>I declared an output array which stores all the supposed outputs after user clicks a number. Basically, just pop all the list items out of the list and insert the new elements into it. It could be tricky by solving this way, the things you need to pay attention to are:
-<ol>
-  <li>Remember to off bind the click event on pre and next button.</li>
-  <li>class="active" needs to be stored then recovered in the new list.</li>
-</ol>
-</p>
+# Dynamic Pagination
+## Examples
+* <1, 2, 3, 4, 5, ... 10>, current = 1
+* <1, ... 6, 7, 8, 9, 10>, current = 10
+* <1, ... 2, 3, 4, 5, 6, ... 10>, current = 4
+
+## Usage:
+```javascript
+new Pagination('demo');
+```
+`demo` is the id of the element you want to append the pagination element to.
+
+## Reference
+Variable | Usage
+--------- | --------
+appendId | id of the element you want to append to 
+pageSize | max page number
+maxShown | max amount of numbers shown in the `list` body.

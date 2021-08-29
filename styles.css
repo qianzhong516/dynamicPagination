@@ -1,0 +1,21 @@
+#root .easy-pagination li{
+    display: inline-block;
+    margin-right: .5em;
+    font-size: 1.5em;
+    cursor: pointer;
+    user-select: none;
+    padding: 5px 15px;
+    background-color: beige;
+}
+
+#root .easy-pagination span {
+    user-select: none;
+}
+
+#root .easy-pagination li.active {
+    color: red;
+}
+
+#root .easy-pagination span {
+    margin-right: 1em;
+}

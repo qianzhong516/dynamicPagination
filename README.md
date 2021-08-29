@@ -1,4 +1,7 @@
 # Dynamic Pagination
+
+demo link: https://qianzhong516.github.io/dynamicPagination/
+
 ## Examples
 * <1, 2, 3, 4, 5, ... 10>, current = 1
 * <1, ... 6, 7, 8, 9, 10>, current = 10
